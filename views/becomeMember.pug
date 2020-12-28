@@ -1,0 +1,12 @@
+extends layout
+
+block content
+  h1.signup-sign Become member
+  if (errors)
+    each error in errors
+      div.alert.alert-danger= error
+  form(method="POST" action="").mt-1
+    div.form-group
+      label(for="password") Member password
+      input(type="password", name="password", required).form-control
+    button(type="submit").btn.btn-primary Submit

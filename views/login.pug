@@ -1,0 +1,15 @@
+extends layout
+
+block content
+  h1.signup-sign Login
+  if (errors)
+    each error in errors
+      div.alert.alert-danger= error
+  form(method="POST" action="").mt-1
+    div.form-group
+      label(for="username") Username
+      input(type="text", name="username", required).form-control
+    div.form-group
+      label(for="password") Password
+      input(type="password", name="password", required).form-control
+    button(type="submit").btn.btn-primary Submit

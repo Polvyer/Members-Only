@@ -1,0 +1,18 @@
+extends layout
+
+block content
+  a(href=message.url).card.m-3.card-cursor
+    div.card-header=message.title
+    div.card-body
+      blockquote.blockquote
+        p=message.message
+        footer.blockquote-footer=message.user.username
+        h6.text-right.text-muted=message.timestamp.toDateString()
+
+  p Do you really want to delete this Message?
+
+  form(method='POST' action='')
+    div.form-group
+      input#messageid.form-control(type='hidden',name='messageid', required='true', value=message._id )
+
+    button.btn.btn-primary(type='submit') Delete

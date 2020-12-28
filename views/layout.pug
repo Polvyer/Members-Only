@@ -1,0 +1,43 @@
+doctype html
+html
+  head
+    title= title
+    meta(charset='utf-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    link(rel="stylesheet", href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css", integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z", crossorigin="anonymous")
+    script(src="https://code.jquery.com/jquery-3.5.1.slim.min.js", integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj", crossorigin="anonymous")
+    script(src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js", integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV", crossorigin="anonymous")
+    link(rel='stylesheet', href='/stylesheets/style.css')
+    link(rel="preconnect" href="https://fonts.gstatic.com")
+    link(href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet")
+  body
+    nav.navbar.navbar-expand-lg.navbar-dark.bg-dark.mb-4
+      a(href="/").navbar-brand Members Only
+      button(type="button", data-toggle="collapse", data-target="#navbarSupportedContent", aria-controls="navbarSupportedContent", aria-expanded="false", aria-label="Toggle navigation").navbar-toggler
+          span.navbar-toggler-icon
+
+      //- User is logged in
+      if user
+        div#navbarSupportedContent.collapse.navbar-collapse
+          ul.navbar-nav.mr-auto
+            li.nav-item #[a(href="/create-message").nav-link Create message]
+            if (user.membership_status !== 'Member')
+              li.nav-item #[a(href="/become-member").nav-link Become member]
+            if (user.membership_status !== 'Admin')
+              li.nav-item #[a(href="/become-admin").nav-link Become admin]
+            li.nav-item #[a(href="/logout").nav-link Logout]
+
+      //- User is not logged in
+      else
+        div#navbarSupportedContent.collapse.navbar-collapse
+          ul.navbar-nav.mr-auto
+            li.nav-item #[a(href="/login").nav-link Login]
+            li.nav-item #[a(href="/signup").nav-link Signup]
+
+    block content
+    
+    if user
+      div.fixed-bottom.bg-dark.footer-container
+        img(src="./images/small-green-dot.png").green-dot
+        span.footer-container-name=`${user.username} - ${user.membership_status}`
+

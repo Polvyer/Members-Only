@@ -1,0 +1,33 @@
+extends layout
+
+block content
+  if messages.length !== 0
+    div.card-container
+      each message in messages
+        if (user && user.membership_status === 'Admin')
+          a(href=message.url).card.m-3.card-cursor
+            div.card-header=message.title
+            div.card-body
+              blockquote.blockquote
+                p=message.message
+                if (user && user.membership_status !== 'User')
+                  footer.blockquote-footer=message.user.username
+                  h6.text-right.text-muted=message.timestamp.toDateString()
+                else
+                  footer.blockquote-footer Unknown
+                  h6.text-right.text-muted=message.timestamp.toDateString()
+        else
+          div(style={ width: "18rem; "}).card.m-3
+            div.card-header=message.title
+            div.card-body
+              blockquote.blockquote
+                p=message.message
+                if (user && user.membership_status !== 'User')
+                  footer.blockquote-footer=message.user.username
+                  h6.text-right.text-muted=message.timestamp.toDateString()
+                else
+                  footer.blockquote-footer Unknown
+                  h6.text-right.text-muted=message.timestamp.toDateString()
+  else
+    p No messages :(
+    

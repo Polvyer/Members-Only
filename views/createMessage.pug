@@ -1,0 +1,15 @@
+extends layout
+
+block content
+  h1.signup-sign Create message
+  if (errors)
+    each error in errors
+      div.alert.alert-danger= error
+  form(method="POST" action="").mt-1
+    div.form-group
+      label(for="username") Title
+      input(type="text", name="title", required).form-control
+    div.form-group
+      label(for="message") Message
+      textarea(name="message" required rows="3").form-control
+    button(type="submit").btn.btn-primary Submit
